@@ -50,6 +50,7 @@ SyntacticalAnalyzer::SyntacticalAnalyzer (char * filename)
        /* program. This should be a LPAREN_T. It then calls program. 
     /********************************************************************************/
     lex = new LexicalAnalyzer (filename);
+    cg = new CodeGenerator (filename);
     int fnlength = strlen (filename);
     filename[fnlength-2] = 'p';
     filename[fnlength-1] = '2';
@@ -139,6 +140,7 @@ int SyntacticalAnalyzer::define(){
     string nonTerminal = "define";
     print(nonTerminal, token, rule);
 
+    
     if(rule == -1){
 	vector<int>expected_vector;
 	expected_vector.push_back(LPAREN_T);
@@ -176,6 +178,7 @@ int SyntacticalAnalyzer::define(){
 	token = NextToken();
 	expected_vector.push_back(IDENT_T);
 	errors += enforce(token, expected_vector);
+	cg->StartFunc(lex->GetLexeme());
 	if(token == EOF_T) {
             ending(nonTerminal, token, errors);	
 	    return errors;
@@ -187,6 +190,7 @@ int SyntacticalAnalyzer::define(){
 
 	expected_vector.push_back(RPAREN_T);
 	errors += enforce(token, expected_vector);
+	cg->WriteCode("){\n"); //
 	if(token == EOF_T) {
             ending(nonTerminal, token, errors);	
 	    return errors;
@@ -208,7 +212,8 @@ int SyntacticalAnalyzer::define(){
 
 	token = NextToken();	//Get one additional token
     }
-    ending(nonTerminal, token, errors);	
+    ending(nonTerminal, token, errors);
+    cg->WriteCode("}\n");
     return errors;
 }
 
@@ -566,29 +571,91 @@ int SyntacticalAnalyzer::action(){
 	errors += runNonterminal("stmt");
 	errors += runNonterminal("stmt");
 	break;
-    case 22 ... 23:
+    case 22:
         token = NextToken();
         errors += runNonterminal("stmt_list");
         break;
-    case 24 ... 31:
+    case 23:
+      token = NextToken();
+      errors += runNonterminal("stmt_list");
+      break;
+    case 24:
 	token = NextToken();
 	errors += runNonterminal("stmt");
 	break;
+    case 25:
+      token = NextToken();
+      errors += runNonterminal("stmt");
+      break;
+    case 26:
+      token = NextToken();
+      errors += runNonterminal("stmt");
+      break;
+    case 27:
+      token = NextToken();
+      errors += runNonterminal("stmt");
+      break;
+    case 28:
+      token = NextToken();
+      errors += runNonterminal("stmt");
+      break;
+    case 29:
+      token = NextToken();
+      errors += runNonterminal("stmt");
+      break;
+    case 30:
+      token = NextToken();
+      errors += runNonterminal("stmt");
+      break;
+    case 31:
+      token = NextToken();
+      errors += runNonterminal("stmt");
+      break;
     case 32:
 	token = NextToken();
 	errors += runNonterminal("stmt_list");
 	break;
-    case 33 ... 34:
+    case 33:
+      	token = NextToken();
+	errors += runNonterminal("stmt");
+	errors += runNonterminal("stmt_list");
+	break; 
+    case 34:
 	token = NextToken();
 	errors += runNonterminal("stmt");
 	errors += runNonterminal("stmt_list");
-	break;
-    case 35 ... 41:
+	break; 
+    case 35:
 	token = NextToken();
+	errors += runNonterminal("stmt_list");
+	break;
+    case 36:
+      	token = NextToken();
+	errors += runNonterminal("stmt_list");
+	break;
+    case 37:
+      	token = NextToken();
+	errors += runNonterminal("stmt_list");
+	break;
+    case 38:
+      	token = NextToken();
+	errors += runNonterminal("stmt_list");
+	break;
+    case 39:
+      	token = NextToken();
+	errors += runNonterminal("stmt_list");
+	break;
+    case 40:
+      	token = NextToken();
+	errors += runNonterminal("stmt_list");
+	break;
+    case 41:
+      	token = NextToken();
 	errors += runNonterminal("stmt_list");
 	break;
     case 42:
 	token = NextToken();
+	cg->WriteCode("cout << ");
 	errors += runNonterminal("stmt");
 	break;
     case 43:
