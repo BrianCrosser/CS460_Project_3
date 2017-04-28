@@ -556,109 +556,109 @@ int SyntacticalAnalyzer::action(){
     }
    
     switch (rule) {
-    case 19:
+    case 19: // if
 	token = NextToken();
 	errors += runNonterminal("stmt");
 	errors += runNonterminal("stmt");
 	errors += runNonterminal("else_part");
 	break;
-    case 20:
+    case 20: // List op - car/cdr
       token = NextToken();
       errors += runNonterminal("stmt");
       break;
-    case 21:
+    case 21: // cons
 	token = NextToken();
 	errors += runNonterminal("stmt");
 	errors += runNonterminal("stmt");
 	break;
-    case 22:
+    case 22: // and
         token = NextToken();
         errors += runNonterminal("stmt_list");
         break;
-    case 23:
+    case 23: // or
       token = NextToken();
       errors += runNonterminal("stmt_list");
       break;
-    case 24:
+    case 24: // not
 	token = NextToken();
 	errors += runNonterminal("stmt");
 	break;
-    case 25:
+    case 25: // number?
       token = NextToken();
       errors += runNonterminal("stmt");
       break;
-    case 26:
+    case 26: // symbol?
       token = NextToken();
       errors += runNonterminal("stmt");
       break;
-    case 27:
+    case 27: // list?
       token = NextToken();
       errors += runNonterminal("stmt");
       break;
-    case 28:
+    case 28: // zero?
       token = NextToken();
       errors += runNonterminal("stmt");
       break;
-    case 29:
+    case 29: // null?
       token = NextToken();
       errors += runNonterminal("stmt");
       break;
-    case 30:
+    case 30: // char?
       token = NextToken();
       errors += runNonterminal("stmt");
       break;
-    case 31:
+    case 31: // string?
       token = NextToken();
       errors += runNonterminal("stmt");
       break;
-    case 32:
+    case 32: // +
 	token = NextToken();
 	errors += runNonterminal("stmt_list");
 	break;
-    case 33:
+    case 33: // -
       	token = NextToken();
-	errors += runNonterminal("stmt");
-	errors += runNonterminal("stmt_list");
-	break; 
-    case 34:
-	token = NextToken();
 	errors += runNonterminal("stmt");
 	errors += runNonterminal("stmt_list");
 	break; 
-    case 35:
+    case 34: // /
+	token = NextToken();
+	errors += runNonterminal("stmt");
+	errors += runNonterminal("stmt_list");
+	break; 
+    case 35: // *
 	token = NextToken();
 	errors += runNonterminal("stmt_list");
 	break;
-    case 36:
+    case 36: // =
       	token = NextToken();
 	errors += runNonterminal("stmt_list");
 	break;
-    case 37:
+    case 37: // >
       	token = NextToken();
 	errors += runNonterminal("stmt_list");
 	break;
-    case 38:
+    case 38: // <
       	token = NextToken();
 	errors += runNonterminal("stmt_list");
 	break;
-    case 39:
+    case 39: // >=
       	token = NextToken();
 	errors += runNonterminal("stmt_list");
 	break;
-    case 40:
+    case 40: // <=
       	token = NextToken();
 	errors += runNonterminal("stmt_list");
 	break;
-    case 41:
+    case 41: // IDENT_T
       	token = NextToken();
 	errors += runNonterminal("stmt_list");
 	break;
-    case 42:
+    case 42: // display
 	token = NextToken();
 	cg->WriteCode("cout << ");
 	errors += runNonterminal("stmt");
 	break;
-    case 43:
+    case 43: // newline
 	token = lex ->GetToken();
 	break;
     }

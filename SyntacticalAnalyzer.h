@@ -6,7 +6,6 @@
 #include "LexicalAnalyzer.h"
 #include "CodeGenerator.h"
 #include <vector>
-
 using namespace std;
 
 class SyntacticalAnalyzer 
@@ -16,6 +15,7 @@ class SyntacticalAnalyzer
 	~SyntacticalAnalyzer ();
     private:
 	LexicalAnalyzer * lex;
+	CodeGenerator *cg;
 	ofstream p2file;
 	ofstream lstfile;
 	token_type token;
@@ -38,7 +38,6 @@ class SyntacticalAnalyzer
 	int runNonterminal(string n);
 	token_type NextToken();
 	string lstOutput;
-	CodeGenerator *cg;
 };
 	
 #endif

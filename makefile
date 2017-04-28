@@ -1,7 +1,7 @@
-P3.out : Project3.o SetLimits.o LexicalAnalyzer.o SyntacticalAnalyzer.o
-	g++ -g -o P3.out Project3.o SetLimits.o LexicalAnalyzer.o SyntacticalAnalyzer.o
+P3.out : Project3.o SetLimits.o LexicalAnalyzer.o SyntacticalAnalyzer.o CodeGenerator.o
+	g++ -g -o P3.out Project3.o SetLimits.o LexicalAnalyzer.o SyntacticalAnalyzer.o CodeGenerator.o
 
-Project3.o : Project3.cpp SetLimits.h SyntacticalAnalyzer.h
+Project3.o : Project3.cpp SetLimits.h SyntacticalAnalyzer.h 
 	g++ -g -c Project3.cpp
 
 SetLimits.o : SetLimits.cpp SetLimits.h
@@ -10,14 +10,16 @@ SetLimits.o : SetLimits.cpp SetLimits.h
 LexicalAnalyzer.o : LexicalAnalyzer.save
 	cp LexicalAnalyzer.save LexicalAnalyzer.o
 
-SyntacticalAnalyzer.o : SyntacticalAnalyzer.cpp SyntacticalAnalyzer.h LexicalAnalyzer.h
+SyntacticalAnalyzer.o : SyntacticalAnalyzer.cpp SyntacticalAnalyzer.h LexicalAnalyzer.h CodeGenerator.h
 	g++ -g -c SyntacticalAnalyzer.cpp
 
+CodeGenerator.o: CodeGenerator.cpp CodeGenerator.h
+	g++ -g -c CodeGenerator.cpp
 run : P3.out test.ss
 	./P3.out 2newTest.ss
 
 clean : 
-	rm *.o P3.out *.dbg *.lst *.p2 *.p1
+	rm *.o P3.out ./testFiles/*.dbg ./testFiles/*.lst ./testFiles/*.p2 ./testFiles/*.p1
 
 submit : Project3.cpp LexicalAnalyzer.h LexicalAnalyzer.save SyntacticalAnalyzer.h SyntacticalAnalyzer.cpp makefile README.txt
 	rm -rf TeamGP3

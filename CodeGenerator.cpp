@@ -13,8 +13,8 @@ Stuff about the authors and file
 CodeGenerator::CodeGenerator (char * filename){
   for(int i = 0; filename[i] != '.';i++)
    cppfile  += filename[i];
-  
-  output.open(cppfile + ".cpp", ios::trunc);
+  cppfile += ".cpp";
+  output.open(cppfile.c_str(), ios::trunc);
 
   output << "#include <iostream>" << endl;
   //output << "#include \"Object.h\"" << endl;

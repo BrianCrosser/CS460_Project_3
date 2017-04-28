@@ -1,4 +1,4 @@
-#ifdef CG_H
+#ifndef CG_H
 #define CG_H
 #include <iostream>
 #include <fstream>
@@ -11,11 +11,10 @@ Stuff about the authors and file
 
 */
 
-
 class CodeGenerator{
  public:
   CodeGenerator (char * filename);
-  ~CodeGenerator;
+  ~CodeGenerator();
   void StartFunc(string);
   void WriteCode(string);  
   void PushStack(string);
@@ -23,10 +22,10 @@ class CodeGenerator{
   
  private:
   string cppfile;
-  fstream output;
-  stack operators;
-  stack operands;
+  ofstream output;
+  stack<string> operators;
+  stack<char> operands;
   
-}
+};
 
 #endif
