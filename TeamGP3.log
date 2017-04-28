@@ -14,15 +14,16 @@ Questions:
 
 -------------------------------------------------------
 
-Date: 
-Time: 
-Attendees: 
-What did each member do?: 
-What did we do during meeting?: 
-Plans for next meeting?: 
+Date: 4/27
+Time: 5 pm
+Attendees: Jordan, Fern, Brian 
+What did each member do?: Showed up to first meeting!
+What did we do during meeting?: Set up project files. Brainstormed what needs to be done. Created Code Generator class.
+Plans for next meeting?: Get first test case working
 Each persons' task to do before next meeting?: 
     - Fern: 
     - Jordan:
     - Brian: 
 
-Questions: 
+Questions: Where do we get the object.h object.cpp files?
+Questions: How to handle prefix to infix notation. e.i. (+ 5 6 7).
