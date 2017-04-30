@@ -82,6 +82,7 @@ SyntacticalAnalyzer::~SyntacticalAnalyzer ()
     lstfile.close();
     cout << "Lexical errors: ";
     delete lex;
+    delete cg;
 }
 
 /**
