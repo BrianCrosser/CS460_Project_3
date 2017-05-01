@@ -12,7 +12,7 @@ Stuff about the authors and file
 
 CodeGenerator::CodeGenerator (char * filename){
   for(int i = 0; filename[i] != '.';i++)
-   cppfile  += filename[i];
+  cppfile  += filename[i];
   cppfile += ".cpp";
   output.open(cppfile.c_str(), ios::trunc);
 

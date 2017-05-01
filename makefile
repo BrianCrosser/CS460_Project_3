@@ -15,8 +15,8 @@ SyntacticalAnalyzer.o : SyntacticalAnalyzer.cpp SyntacticalAnalyzer.h LexicalAna
 
 CodeGenerator.o: CodeGenerator.cpp CodeGenerator.h
 	g++ -g -c CodeGenerator.cpp
-run : P3.out test.ss
-	./P3.out 2newTest.ss
+run : P3.out
+	./P3.out ./testFiles/1_test.ss
 
 clean : 
 	rm *.o P3.out ./testFiles/*.dbg ./testFiles/*.lst ./testFiles/*.p2 ./testFiles/*.p1
