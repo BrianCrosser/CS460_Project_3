@@ -19,13 +19,13 @@ class CodeGenerator{
   void WriteCode(string);  
   void PushStack(string);
   string GetOperation();
-  
+  bool haveSeenMain();
+  stack<string> operators;
+  string equation;
  private:
   string cppfile;
   ofstream output;
-  stack<string> operators;
-  stack<char> operands;
-  
+  bool seenMain;
 };
 
 #endif

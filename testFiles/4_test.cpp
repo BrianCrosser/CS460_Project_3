@@ -4,8 +4,7 @@
 using namespace std;
 
 int main(){
-	cout << (5+7);
-	cout << endl;
+	cout << ((5+7)9);
 
 	return 0;
 }

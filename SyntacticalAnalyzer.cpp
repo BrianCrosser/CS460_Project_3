@@ -214,7 +214,11 @@ int SyntacticalAnalyzer::define(){
 	token = NextToken();	//Get one additional token
     }
     ending(nonTerminal, token, errors);
-    cg->WriteCode("    return 0;\n}\n");
+    if(cg->haveSeenMain()){
+        cg->WriteCode("\n\treturn 0;\n}\n");
+    } else {
+        cg->WriteCode("\n\treturn returnValue;\n}\n");
+    }
     return errors;
 }
 
@@ -283,6 +287,7 @@ int SyntacticalAnalyzer::stmt_list(){
 	errors += runNonterminal("stmt_list");
     } else if (rule == 6){
         //Do nothing for lambda.
+      //cg->WriteCode(";\n");
     }
     ending(nonTerminal, token, errors);
     return errors;
@@ -364,13 +369,30 @@ int SyntacticalAnalyzer::literal(){
 	rule = GetRule(5,token);
     }
     if (rule == 10) {
-	token = NextToken();	//Get one additional token
+      cout << "Lex: " << lex->GetLexeme() << endl;
+      cg->equation += lex->GetLexeme();
+      cg->equation += cg->operators.top();
+
+	token = NextToken();	//Get one additional token - numlit
+	//cg->WriteCode(lex->GetLexeme());
+	//cg->WriteCode(cg->operators.top());
+	
     } else if (rule == 11) {
 	token = NextToken();
 	errors += runNonterminal("quoted_lit");
-
+	
     }
-
+    
+    if(token == RPAREN_T){
+      cg->equation.pop_back();
+      cg->operators.pop();
+      cg->WriteCode(cg->equation);
+      cg->WriteCode(")");
+      if(cg->operators.empty()){
+	cg->WriteCode( ";\n");
+      }
+      cg->equation = "";
+    }
     ending(nonTerminal, token, errors);
     return errors;
 }
@@ -531,7 +553,7 @@ int SyntacticalAnalyzer::else_part(){
  * called when non-terminating action() is reached
  **/
 int SyntacticalAnalyzer::action(){
-  /********************************************************************                                                                                               
+  /********************************************************************                                                                             n                  
   /* This funciton will take in a token,
   /* find a rule number for it, and proceed with the rule it recieves
   /* If the rule is -1, we will cycle through the tokens until we get a
@@ -613,20 +635,25 @@ int SyntacticalAnalyzer::action(){
       errors += runNonterminal("stmt");
       break;
     case 32: // +
-	token = NextToken();
-	errors += runNonterminal("stmt_list");
+      cg->WriteCode("(");
+      cg->operators.push("+");
+      token = NextToken();
+      errors += runNonterminal("stmt_list");
 	break;
     case 33: // -
-      	token = NextToken();
-	errors += runNonterminal("stmt");
-	errors += runNonterminal("stmt_list");
+      cg->operators.push("-");
+      token = NextToken();
+      errors += runNonterminal("stmt");
+      errors += runNonterminal("stmt_list");
 	break; 
     case 34: // /
+      cg->operators.push("/");
 	token = NextToken();
 	errors += runNonterminal("stmt");
 	errors += runNonterminal("stmt_list");
 	break; 
     case 35: // *
+      cg->operators.push("*");
 	token = NextToken();
 	errors += runNonterminal("stmt_list");
 	break;
@@ -656,12 +683,13 @@ int SyntacticalAnalyzer::action(){
 	break;
     case 42: // display
 	token = NextToken();
-	cg->WriteCode("cout << ");
+	cg->WriteCode("\tcout << ");
 	errors += runNonterminal("stmt");
 	break;
     case 43: // newline
-	token = lex ->GetToken();
-	break;
+      cg->WriteCode("\tcout << endl;\n");
+      token = lex ->GetToken();
+      break;
     }
 
     ending(nonTerminal, token, errors);
