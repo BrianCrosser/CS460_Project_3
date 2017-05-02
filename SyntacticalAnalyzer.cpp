@@ -214,7 +214,7 @@ int SyntacticalAnalyzer::define(){
 	token = NextToken();	//Get one additional token
     }
     ending(nonTerminal, token, errors);
-    cg->WriteCode("}\n");
+    cg->WriteCode("    return 0;\n}\n");
     return errors;
 }
 

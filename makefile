@@ -16,12 +16,12 @@ SyntacticalAnalyzer.o : SyntacticalAnalyzer.cpp SyntacticalAnalyzer.h LexicalAna
 CodeGenerator.o: CodeGenerator.cpp CodeGenerator.h
 	g++ -g -c CodeGenerator.cpp
 run : P3.out
-	./P3.out ./testFiles/1_test.ss
+	./P3.out testFiles/1_test.ss
 
 clean : 
 	rm *.o P3.out ./testFiles/*.dbg ./testFiles/*.lst ./testFiles/*.p2 ./testFiles/*.p1
 
-submit : Project3.cpp LexicalAnalyzer.h LexicalAnalyzer.save SyntacticalAnalyzer.h SyntacticalAnalyzer.cpp makefile README.txt
+submit : Project3.cpp LexicalAnalyzer.h LexicalAnalyzer.save SyntacticalAnalyzer.h SyntacticalAnalyzer.cpp makefile README.txt CodeGenerator.h CodeGenerator.cpp
 	rm -rf TeamGP3
 	mkdir TeamGP3
 	cp Project3.cpp TeamGP3
@@ -29,6 +29,8 @@ submit : Project3.cpp LexicalAnalyzer.h LexicalAnalyzer.save SyntacticalAnalyzer
 	cp LexicalAnalyzer.save TeamGP3
 	cp SyntacticalAnalyzer.h TeamGP3
 	cp SyntacticalAnalyzer.cpp TeamGP3
+	cp CodeGenerator.h TeamGP3
+	cp CodeGenerator.cpp TeamGP3
 	cp makefile TeamGP3
 	cp README.txt TeamGP3
 	tar cfvz TeamGP3.tgz TeamGP3

@@ -1,15 +1,17 @@
-Date: 
-Time: 
-Attendees: 
+Date: 5/1 
+Time: 3 pm
+Attendees: Jordan, Fern, Brian 
 What did each member do?: 
-What did we do during meeting?: 
-Plans for next meeting?: 
+    - Fern: Fixed the default output for .cpp file
+    - Jordan: 
+    - Brian: Made bash script to determine any diffs between result and expected result
+What did we do during meeting?: Ask questions that arose during previous meeting
+Plans for next meeting?: Get 1_test.ss working 
 Each persons' task to do before next meeting?: 
     - Fern: 
     - Jordan:
     - Brian: 
 
-Questions: 
 
 
 -------------------------------------------------------
