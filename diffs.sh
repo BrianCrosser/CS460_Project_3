@@ -1,14 +1,28 @@
-
 if [ -f "./testFiles/1_test.cpp" ] && [ -f "./testFiles/expected/1_test.exp.cpp" ]
 then
     echo 'Lines proceded by < are from ' 1_test.cpp
     echo 'Lines proceded by > are from ' 1_test.exp.cpp
     echo
 
-    diff -y -s -b ./testFiles/1_test.cpp ./testFiles/expected/1_test.exp.cpp
+    diff -y -s -b -E -B ./testFiles/1_test.cpp ./testFiles/expected/1_test.exp.cpp
 else
     echo "error: missing file!"
 fi
+echo "================================================================================"
+
+
+if [ -f "./testFiles/2_test.cpp" ] && [ -f "./testFiles/expected/2_test.exp.cpp" ]
+then
+    echo 'Lines proceded by < are from ' 2_test.cpp
+    echo 'Lines proceded by > are from ' 2_test.exp.cpp
+    echo
+
+    diff -y -s -b -E -B ./testFiles/2_test.cpp ./testFiles/expected/2_test.exp.cpp
+else
+    echo "error: missing file!"
+fi
+echo "================================================================================"
+
 
 if [ -f "./testFiles/3_test.cpp" ] && [ -f "./testFiles/expected/3_test.exp.cpp" ]
 then
@@ -16,8 +30,34 @@ then
     echo 'Lines proceded by > are from ' 3_test.exp.cpp
     echo
 
-    diff -y -s -b ./testFiles/3_test.cpp ./testFiles/expected/3_test.exp.cpp
+    diff -y -s -b -E -B ./testFiles/3_test.cpp ./testFiles/expected/3_test.exp.cpp
 else
     echo "error: missing file!"
 fi
+echo "================================================================================"
 
+
+if [ -f "./testFiles/4_test.cpp" ] && [ -f "./testFiles/expected/4_test.exp.cpp" ]
+then
+    echo 'Lines proceded by < are from ' 4_test.cpp
+    echo 'Lines proceded by > are from ' 4_test.exp.cpp
+    echo
+
+    diff -y -s -b -E -B ./testFiles/4_test.cpp ./testFiles/expected/4_test.exp.cpp
+else
+    echo "error: missing file!"
+fi
+echo "================================================================================"
+
+
+if [ -f "./testFiles/5_test.cpp" ] && [ -f "./testFiles/expected/5_test.exp.cpp" ]
+then
+    echo 'Lines proceded by < are from ' 5_test.cpp
+    echo 'Lines proceded by > are from ' 5_test.exp.cpp
+    echo
+
+    diff -y -s -b -E -B ./testFiles/5_test.cpp ./testFiles/expected/5_test.exp.cpp
+else
+    echo "error: missing file!"
+fi
+echo "================================================================================"

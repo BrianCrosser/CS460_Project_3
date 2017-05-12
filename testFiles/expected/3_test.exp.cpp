@@ -3,8 +3,8 @@
 
 using namespace std;
 
-int main()
-{
+int main(){
+    Object _retVal;
     cout << (5+7+2+3+4);
     cout << endl;
 

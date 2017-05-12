@@ -3,10 +3,18 @@
 
 using namespace std;
 
+Object add(){
+    Object _retVal;
+
+    cout << (5+7);
+    cout << endl;
+
+    return _retVal;
+}
+
 int main(){
     Object _retVal;
-    cout << ((5+7)/3);
-    cout << endl;
+    add();
     
     return 0;
 }

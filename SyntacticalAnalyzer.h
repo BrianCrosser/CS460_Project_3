@@ -22,7 +22,7 @@ class SyntacticalAnalyzer
 	int program();
 	int define();
 	int more_defines();
-	int stmt_list();
+	int stmt_list(string);
 	int stmt();
 	int literal();
 	int quoted_lit();

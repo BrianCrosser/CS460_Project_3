@@ -4,7 +4,8 @@
 using namespace std;
 
 int main(){
-    cout << ((5+7)+9);
+    Object _retVal;
+    cout << ((5-7)+9);
     cout << endl;
     
     return 0;

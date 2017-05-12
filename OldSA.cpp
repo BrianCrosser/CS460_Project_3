@@ -291,7 +291,7 @@ int SyntacticalAnalyzer::stmt_list(string operater){
               cg->operators.pop();
               if(!cg->operators.empty()){
                 operater = cg->operators.top();
-                //cg->WriteCode(operater);
+                cg->WriteCode(operater);
               } else {	     
                 operater = "";
                 cg->WriteCode(";\n");
@@ -299,7 +299,7 @@ int SyntacticalAnalyzer::stmt_list(string operater){
               }
             }
         }
-        else if(cg->operators.size() != 1){ cg->WriteCode(operater); }
+        else { cg->WriteCode(operater); }
         errors += stmt_list(operater);
     }//if(operater != "" && token != RPAREN_T)
         //cg->WriteCode(operater);
@@ -341,9 +341,6 @@ int SyntacticalAnalyzer::stmt(){
 	    token = NextToken();
 	    string oper = lex->GetLexeme();
         errors += action();
-        if(token == RPAREN_T && !cg->operators.empty()){
-            cg->WriteCode(cg->operators.top());
-        };
         vector<int>expected_vector;
         expected_vector.push_back(RPAREN_T);
         errors+= enforce(token, expected_vector);
@@ -379,25 +376,26 @@ int SyntacticalAnalyzer::literal(){
 	int array[2] = {NUMLIT_T, QUOTE_T};
 	vector<int>expected_vector(array, array+2);
 	errors += enforce(token,expected_vector);
-    if(token == EOF_T) {
+        if(token == EOF_T) {
 	    ending(nonTerminal, token, errors);
 	    return errors;
 	}
 
 	rule = GetRule(5,token);
     }
-    if (rule == 10) {//numlit
+    if (rule == 10) {
       cout << "Lex: " << lex->GetLexeme() << endl;
       //cg->equation += lex->GetLexeme();
       //cg->equation += cg->operators.top();
 
-        cg->WriteCode(lex->GetLexeme());
-        token = NextToken();	//Get one additional token - numlit
-        //cg->WriteCode(cg->operators.top());
+	cg->WriteCode(lex->GetLexeme());
+	token = NextToken();	//Get one additional token - numlit
+	//cg->WriteCode(cg->operators.top());
 	
     } else if (rule == 11) {
-        token = NextToken();
-        errors += runNonterminal("quoted_lit");
+	token = NextToken();
+	errors += runNonterminal("quoted_lit");
+	
     }
     
     //if(token == RPAREN_T){

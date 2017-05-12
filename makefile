@@ -17,8 +17,11 @@ CodeGenerator.o: CodeGenerator.cpp CodeGenerator.h
 	g++ -g -c -std=c++11 CodeGenerator.cpp
 run : P3.out
 	./P3.out testFiles/1_test.ss
+	./P3.out testFiles/2_test.ss
 	./P3.out testFiles/3_test.ss
 	./P3.out testFiles/4_test.ss
+	./P3.out testFiles/5_test.ss
+	./diffs.sh
 
 clean : 
 	rm *.o P3.out ./testFiles/*.dbg ./testFiles/*.lst ./testFiles/*.p2 ./testFiles/*.p1

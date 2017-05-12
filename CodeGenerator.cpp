@@ -34,7 +34,7 @@ void CodeGenerator::StartFunc(string funcName){
     seenMain = true;
     output << "int main(";
   }else{
-    output << "Object " + funcName +'(';
+    output << "Object " + funcName + "(";
   }
 }
 

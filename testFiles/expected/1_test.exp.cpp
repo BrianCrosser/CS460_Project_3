@@ -4,6 +4,8 @@
 using namespace std;
 
 int main(){
+    Object _retVal;
+
     cout << (5+7);
     cout << endl;
     
