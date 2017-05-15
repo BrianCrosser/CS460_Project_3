@@ -3,10 +3,10 @@
 
 using namespace std;
 
-Object add(){
+Object add(Object num1, Object num2){
     Object _retVal;
 
-    cout << (5+7);
+    cout << (num1+num2);
     cout << endl;
 
     return _retVal;
@@ -15,7 +15,7 @@ Object add(){
 int main(){
     Object _retVal;
     
-    add();
+    add(5, 7);
     
     return 0;
 }

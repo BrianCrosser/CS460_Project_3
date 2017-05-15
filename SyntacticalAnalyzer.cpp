@@ -192,7 +192,7 @@ int SyntacticalAnalyzer::define(){
 	expected_vector.push_back(RPAREN_T);
 	errors += enforce(token, expected_vector);
 	cg->WriteCode("){\n"); //
-	cg->WriteCode("    Object _retVal; \n");
+	cg->WriteCode("    Object _retVal; \n\n");
 	if(token == EOF_T) {
             ending(nonTerminal, token, errors);	
 	    return errors;
@@ -519,8 +519,11 @@ int SyntacticalAnalyzer::param_list(){
 	rule = GetRule(8, token);
     }
     if (rule == 15) {
-	token = NextToken();
-	errors += runNonterminal("param_list");
+	    cg->WriteCode("Object " + lex->GetLexeme());
+        token = NextToken();
+	    if(token == IDENT_T)
+            cg->WriteCode(", ");
+        errors += runNonterminal("param_list");
 
     } else if (rule == 16) {
 	//Do nothing for lambda.
@@ -705,11 +708,11 @@ int SyntacticalAnalyzer::action(){
 	break;
     case 42: // display
 	token = NextToken();
-	cg->WriteCode("\tcout << ");
+	cg->WriteCode("    cout << ");
 	errors += runNonterminal("stmt");
 	break;
     case 43: // newline
-      cg->WriteCode("\tcout << endl;\n");
+      cg->WriteCode("    cout << endl;\n");
       token = lex ->GetToken();
       break;
     }
