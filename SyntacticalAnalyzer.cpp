@@ -646,9 +646,14 @@ int SyntacticalAnalyzer::action(){
       cg->WriteCode(")");
       break;
     case 21: // cons
+      if(stmtDepth == 1)
+	cg->WriteCode("\t_retVal = ");
+      cg->WriteCode(lex->GetLexeme()+"(");
 	token = NextToken();
 	errors += runNonterminal("stmt");
+	cg->WriteCode(",");
 	errors += runNonterminal("stmt");
+	cg->WriteCode(")");
 	break;
     case 22: // and
         cg->WriteCode("(");
