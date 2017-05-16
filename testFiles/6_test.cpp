@@ -71,11 +71,11 @@ Object equal_to(Object num1, Object num2){
 int main(){
     Object _retVal; 
 
-    less();
-    great();
-    less_equal();
-    great_equal();
-    equal_to(6,6);
+  less();
+  great();
+  less_equal();
+  great_equal();
+  equal_to(6,6);
 
 	return 0;
 }

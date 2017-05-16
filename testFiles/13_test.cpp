@@ -20,7 +20,7 @@ Object andTest(){
 int main(){
     Object _retVal; 
 
-    andTest();
+  andTest();
 
 	return 0;
 }

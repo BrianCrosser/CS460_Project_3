@@ -6,8 +6,7 @@ using namespace std;
 Object notTest(){
     Object _retVal; 
 
-    if    Object("a");
-{
+    if    Object("a"){
     cout << a;
     }
     else{
@@ -21,7 +20,7 @@ Object notTest(){
 int main(){
     Object _retVal; 
 
-    notTest();
+  notTest();
 
 	return 0;
 }

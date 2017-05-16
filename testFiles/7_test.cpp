@@ -33,9 +33,9 @@ Object addMore(Object num1, Object num2, Object num3){
 int main(){
     Object _retVal; 
 
-    add(5,7);
-    sub(5);
-    addMore(5,7,9);
+  add(5,7);
+  sub(5);
+  addMore(5,7,9);
 
 	return 0;
 }
