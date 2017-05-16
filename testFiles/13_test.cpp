@@ -6,7 +6,7 @@ using namespace std;
 Object andTest(){
     Object _retVal; 
 
-    if((4<5) && (5>2) && (5==5)){
+    if(((4<5) && (5>2) && (5==5))){
     cout << 1;
     }
     else{
@@ -20,7 +20,7 @@ Object andTest(){
 Object orTest(){
     Object _retVal; 
 
-    if((6<5) || (6==6) || (3>1)){
+    if(((6<5) || (6==6) || (3>1))){
     cout << 1;
     }
     else{

@@ -6,7 +6,7 @@ using namespace std;
 Object arithmetic(Object a, Object b, Object c){
     Object _retVal;
 
-    if(!(0 == b)){
+    if((!(0 == b))){
         _retVal = (((a* (b-c))/ 2) + ((a/b)-2-c));
     }
     else{
@@ -22,7 +22,7 @@ Object concat(Object l1, Object l2){
         _retVal = l2;
     }
     else{
-        _retVal = cons(car(l1), (concat(cdr(l1), l2)));
+        _retVal = cons(car(l1), concat(cdr(l1), l2));
     }
     return _retVal;
 }
@@ -30,18 +30,18 @@ Object concat(Object l1, Object l2){
 Object listops1(Object sym, Object ls1, Object ls2){
     Object _retVal;
 
-    _retVal = cons (sym, (concat (ls1, ls2)));
+    _retVal = cons (sym, concat (ls1, ls2));
     return _retVal;
 }
 
 Object listops2(Object ls){
     Object _retVal;
     
-    if(!listp(ls)){
+    if((!listp(ls))){
         _retVal = Object("argument_must_be_a_list");
     }
     else{
-        _retVal = caddr(caddr(ls));
+        _retVal = caddr(cadddr(ls));
     }
     return _retVal;
 }

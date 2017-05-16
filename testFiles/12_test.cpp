@@ -6,7 +6,7 @@ using namespace std;
 Object notTest(){
     Object _retVal; 
 
-    if(!listp(Object("a"))){
+    if((!listp(Object("a")))){
     cout << Object("not_a_list");
     }
     else{

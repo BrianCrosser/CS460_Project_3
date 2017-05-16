@@ -16,7 +16,7 @@
   (cons sym (concat ls1 ls2))
   )
 
-(define (listops ls)
+(define (listops2 ls)
   (if (not (list? ls))
     'argument_must_be_a_list
     (caddr (cadddr ls))

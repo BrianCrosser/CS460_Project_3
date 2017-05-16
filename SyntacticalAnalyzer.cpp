@@ -349,8 +349,13 @@ int SyntacticalAnalyzer::stmt(){
             cg->WriteCode(";\n");
         }
     } else if (rule == 8){
+        if(stmtDepth == 0)
+            cg->WriteCode("    _retVal = ");
         cg->WriteCode(lex->GetLexeme());
         token = NextToken();	//Get one additional token
+        if(stmtDepth == 0){
+            cg->WriteCode(";\n");
+        }
     } else if (rule == 9){
         stmtDepth++;
         token = NextToken();
@@ -628,9 +633,10 @@ int SyntacticalAnalyzer::action(){
    
     switch (rule) {
     case 19: // if
-        cg->WriteCode("    if");
+        cg->WriteCode("    if(");
         token = NextToken();
         errors += runNonterminal("stmt");
+        cg->WriteCode(")");
         stmtDepth--;
         cg->WriteCode("{\n");
         errors += runNonterminal("stmt");
@@ -647,7 +653,7 @@ int SyntacticalAnalyzer::action(){
       break;
     case 21: // cons
       if(stmtDepth == 1)
-	cg->WriteCode("\t_retVal = ");
+        cg->WriteCode("\t_retVal = ");
       cg->WriteCode(lex->GetLexeme()+"(");
 	token = NextToken();
 	errors += runNonterminal("stmt");
@@ -716,6 +722,8 @@ int SyntacticalAnalyzer::action(){
         cg->WriteCode(")");
       break;
     case 32: // +
+    if(stmtDepth==1)
+        cg->WriteCode("_retVal = ");
       cg->WriteCode("(");
       //cg->operators.push("+");
       token = NextToken();
@@ -723,6 +731,8 @@ int SyntacticalAnalyzer::action(){
       cg->WriteCode(")");
 	  break;
     case 33: // -
+    if(stmtDepth==1)
+        cg->WriteCode("_retVal = ");
       cg->WriteCode("(");
       //cg->operators.push("-");
       token = NextToken();
@@ -732,6 +742,8 @@ int SyntacticalAnalyzer::action(){
       cg->WriteCode(")");
 	  break;
     case 34: // /
+    if(stmtDepth==1)
+        cg->WriteCode("_retVal = ");
       cg->WriteCode("(");
       //cg->operators.push("/");
 	token = NextToken();
@@ -741,6 +753,8 @@ int SyntacticalAnalyzer::action(){
       cg->WriteCode(")");
 	break;
     case 35: // *
+    if(stmtDepth==1)
+        cg->WriteCode("_retVal = ");
       cg->WriteCode("(");
     //  cg->operators.push("*");
 	token = NextToken();

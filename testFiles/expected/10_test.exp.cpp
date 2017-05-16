@@ -6,7 +6,7 @@ using namespace std;
 int main(){
     Object _retVal;
 
-    if(7>4){
+    if((7>4)){
         cout << 1;
     }
     else{

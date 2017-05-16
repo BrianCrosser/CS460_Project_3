@@ -6,7 +6,7 @@ using namespace std;
 int main(){
     Object _retVal; 
 
-    if(6<4){
+    if((6<4)){
     _retVal = 1;
     }
     else{
