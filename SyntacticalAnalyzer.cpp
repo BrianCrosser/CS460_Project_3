@@ -648,21 +648,26 @@ int SyntacticalAnalyzer::action(){
 	errors += runNonterminal("stmt");
 	break;
     case 22: // and
+        cg->WriteCode("(");
         token = NextToken();
-        errors += runNonterminal("stmt_list");
+        errors += stmt_list(" && ");
+        cg->WriteCode(")");
         break;
     case 23: // or
-      token = NextToken();
-      errors += runNonterminal("stmt_list");
-      break;
+        cg->WriteCode("(");
+        token = NextToken();
+        errors += stmt_list(" || ");
+        cg->WriteCode(")");
+        break;
     case 24: // not
-	token = NextToken();
-	errors += runNonterminal("stmt");
-	break;
+        cg->WriteCode("!");
+	    token = NextToken();
+	    errors += runNonterminal("stmt");
+	    break;
     case 25: // number?
-      token = NextToken();
-      errors += runNonterminal("stmt");
-      break;
+        token = NextToken();
+        errors += runNonterminal("stmt");
+        break;
     case 26: // symbol?
       token = NextToken();
       errors += runNonterminal("stmt");
