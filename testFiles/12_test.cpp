@@ -6,11 +6,11 @@ using namespace std;
 Object notTest(){
     Object _retVal; 
 
-    if!    Object("a"){
-    cout << a;
+    if(!listp(Object("a"))){
+    cout << Object("not_a_list");
     }
     else{
-    cout << is;
+    cout << Object("is_a_list");
     }
     cout << endl;
 

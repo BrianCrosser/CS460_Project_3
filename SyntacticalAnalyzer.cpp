@@ -417,7 +417,7 @@ int SyntacticalAnalyzer::literal(){
         //cg->WriteCode(cg->operators.top());
 	
     } else if (rule == 11) {
-        cg->WriteCode("    Object(\"");
+        cg->WriteCode("Object(\"");
         token = NextToken();
         errors += runNonterminal("quoted_lit");
         cg->WriteCode("\")");
@@ -663,37 +663,52 @@ int SyntacticalAnalyzer::action(){
         cg->WriteCode(")");
         break;
     case 24: // not
-        cg->WriteCode("!");
+        cg->WriteCode("(!");
 	    token = NextToken();
 	    errors += runNonterminal("stmt");
-	    break;
+	    cg->WriteCode(")");
+        break;
     case 25: // number?
+        cg->WriteCode("numberp(");
         token = NextToken();
         errors += runNonterminal("stmt");
+        cg->WriteCode(")");
         break;
     case 26: // symbol?
+        cg->WriteCode("symbolp(");
       token = NextToken();
       errors += runNonterminal("stmt");
+        cg->WriteCode(")");
       break;
     case 27: // list?
+      cg->WriteCode("listp(");
       token = NextToken();
       errors += runNonterminal("stmt");
+      cg->WriteCode(")");
       break;
     case 28: // zero?
+        cg->WriteCode("zerop(");
       token = NextToken();
       errors += runNonterminal("stmt");
+        cg->WriteCode(")");
       break;
     case 29: // null?
+        cg->WriteCode("nullp(");
       token = NextToken();
       errors += runNonterminal("stmt");
+        cg->WriteCode(")");
       break;
     case 30: // char?
+        cg->WriteCode("charp(");
       token = NextToken();
       errors += runNonterminal("stmt");
+        cg->WriteCode(")");
       break;
     case 31: // string?
+        cg->WriteCode("stringp(");
       token = NextToken();
       errors += runNonterminal("stmt");
+        cg->WriteCode(")");
       break;
     case 32: // +
       cg->WriteCode("(");
