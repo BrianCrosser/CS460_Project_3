@@ -6,11 +6,11 @@ using namespace std;
 Object less(){
     Object _retVal; 
 
-    cout << 57;
+    cout << (5<7);
     cout << endl;
-    cout << 75;
+    cout << (7<5);
     cout << endl;
-    cout << 55;
+    cout << (5<5);
     cout << endl;
 
 	return _retVal;
@@ -19,11 +19,11 @@ Object less(){
 Object great(){
     Object _retVal; 
 
-    cout << 57;
+    cout << (5>7);
     cout << endl;
-    cout << 75;
+    cout << (7>5);
     cout << endl;
-    cout << 55;
+    cout << (5>5);
     cout << endl;
 
 	return _retVal;
@@ -32,11 +32,11 @@ Object great(){
 Object less_equal(){
     Object _retVal; 
 
-    cout << 57;
+    cout << (5<=7);
     cout << endl;
-    cout << 75;
+    cout << (7<=5);
     cout << endl;
-    cout << 55;
+    cout << (5<=5);
     cout << endl;
 
 	return _retVal;
@@ -45,11 +45,11 @@ Object less_equal(){
 Object great_equal(){
     Object _retVal; 
 
-    cout << 57;
+    cout << (5>=7);
     cout << endl;
-    cout << 75;
+    cout << (7>=5);
     cout << endl;
-    cout << 55;
+    cout << (5>=5);
     cout << endl;
 
 	return _retVal;

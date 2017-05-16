@@ -699,25 +699,35 @@ int SyntacticalAnalyzer::action(){
 	errors += stmt_list("*");
       cg->WriteCode(")");
 	break;
-    case 36: // =
-      	token = NextToken();
-        errors += runNonterminal("stmt_list");
+    case 36: // ==
+      	cg->WriteCode("(");
+        token = NextToken();
+        errors += stmt_list("==");
+        cg->WriteCode(")");
 	break;
     case 37: // >
-      	token = NextToken();
-	errors += runNonterminal("stmt_list");
+      	cg->WriteCode("(");
+        token = NextToken();
+	    errors += stmt_list(">");
+        cg->WriteCode(")");
 	break;
     case 38: // <
+      	cg->WriteCode("(");
       	token = NextToken();
-	errors += runNonterminal("stmt_list");
-	break;
+	    errors += stmt_list("<");
+        cg->WriteCode(")");
+	    break;
     case 39: // >=
+      	cg->WriteCode("(");
       	token = NextToken();
-	errors += runNonterminal("stmt_list");
-	break;
+	    errors += stmt_list(">=");
+        cg->WriteCode(")");
+	    break;
     case 40: // <=
+      	cg->WriteCode("(");
       	token = NextToken();
-	errors += runNonterminal("stmt_list");
+	    errors += stmt_list("<=");
+        cg->WriteCode(")");
 	break;
     case 41: // IDENT_T
       cg->WriteCode("    "+lex->GetLexeme() + "(");
