@@ -697,14 +697,12 @@ int SyntacticalAnalyzer::action(){
       break;
     case 32: // +
       cg->WriteCode("(");
-      //cg->operators.push("+");
       token = NextToken();
       errors += stmt_list("+");
       cg->WriteCode(")");
 	  break;
     case 33: // -
       cg->WriteCode("(");
-      //cg->operators.push("-");
       token = NextToken();
       errors += runNonterminal("stmt");
       cg->WriteCode("-");
@@ -712,13 +710,12 @@ int SyntacticalAnalyzer::action(){
       cg->WriteCode(")");
 	  break;
     case 34: // /
-      cg->WriteCode("(");
-      //cg->operators.push("/");
-	token = NextToken();
-	errors += runNonterminal("stmt");
-    cg->WriteCode("/");
-	errors += stmt_list("/"); 
-      cg->WriteCode(")");
+        cg->WriteCode("(");
+        token = NextToken();
+        errors += runNonterminal("stmt");
+        cg->WriteCode("/");
+        errors += stmt_list("/"); 
+        cg->WriteCode(")");
 	break;
     case 35: // *
       cg->WriteCode("(");
