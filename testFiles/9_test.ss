@@ -1,8 +1,11 @@
 (define (removeFirst list)
-    (display (car list))
-    (newline)
+  (car list)
 )
 
 (define (main)
-    (removeFirst '(1 2 3 4))
+  (display(removeFirst '(1 2 3 4)))
+  (newline)
 )
+
+
+(main)
