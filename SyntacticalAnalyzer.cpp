@@ -342,13 +342,15 @@ int SyntacticalAnalyzer::stmt(){
 	rule = GetRule(4,token);
     }
     if (rule == 7){
-	errors += runNonterminal("literal");	
+        if(stmtDepth == 0)
+            cg->WriteCode("_retVal = ");
+        errors += runNonterminal("literal");	
     } else if (rule == 8){
         cg->WriteCode(lex->GetLexeme());
-	token = NextToken();	//Get one additional token
+        token = NextToken();	//Get one additional token
     } else if (rule == 9){
         stmtDepth++;
-	    token = NextToken();
+	token = NextToken();
         bool callingIF = false;
         if (token == IF_T){
            callingIF = true; 
@@ -412,7 +414,7 @@ int SyntacticalAnalyzer::literal(){
         //cg->WriteCode(cg->operators.top());
 	
     } else if (rule == 11) {
-        cg->WriteCode("    _retVal = Object(\"");
+        cg->WriteCode("    Object(\"");
         token = NextToken();
         errors += runNonterminal("quoted_lit");
         cg->WriteCode("\");\n");
@@ -634,8 +636,9 @@ int SyntacticalAnalyzer::action(){
         break;
     case 20: // List op - car/cdr
       token = NextToken();
+      cg->WriteCode("\tcar(");
       errors += runNonterminal("stmt");
-      cg->WriteCode("car(");
+      cg->WriteCode(")");
       break;
     case 21: // cons
 	token = NextToken();
@@ -750,7 +753,7 @@ int SyntacticalAnalyzer::action(){
         cg->WriteCode(")");
 	break;
     case 41: // IDENT_T
-      cg->WriteCode("    "+lex->GetLexeme() + "(");
+      cg->WriteCode("  "+lex->GetLexeme() + "(");
       token = NextToken();
       errors += stmt_list(",");
       cg->WriteCode(")");

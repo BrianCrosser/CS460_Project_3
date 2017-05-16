@@ -4,15 +4,19 @@
 using namespace std;
 
 Object removeFirst(Object list){
-    Object _retVal;
+    Object _retVal; 
+
     _retVal = car(list);
+    
     return _retVal;
 }
 
-
 int main(){
-  Object _retVal;
-  _retVal = removeFirst(Object("(1 2 3 4)"));
-  cout << _retVal << endl;
-  return 0;
+    Object _retVal; 
+
+    cout <<  removeFirst(Object("(1 2 3 4)"));
+    
+    cout << endl;
+    return 0;
 }
+
