@@ -613,11 +613,14 @@ int SyntacticalAnalyzer::action(){
    
     switch (rule) {
     case 19: // if
-	token = NextToken();
-	errors += runNonterminal("stmt");
-	errors += runNonterminal("stmt");
-	errors += runNonterminal("else_part");
-	break;
+      cg->WriteCode("if");
+        token = NextToken();
+        errors += runNonterminal("stmt");
+        cg->WriteCode("{\n");
+        errors += runNonterminal("stmt");
+        cg->WriteCode("\n}\n");
+        errors += runNonterminal("else_part");
+        break;
     case 20: // List op - car/cdr
       token = NextToken();
       errors += runNonterminal("stmt");
