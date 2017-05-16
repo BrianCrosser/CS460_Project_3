@@ -1,0 +1,6 @@
+(define (main)
+  (if (< 4 6)
+    (display 1)
+    )
+    (newline)
+  )
