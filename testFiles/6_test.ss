@@ -12,7 +12,7 @@
     (newline)
     (display (> 7 5))
     (newline)
-    (display (< 5 5))
+    (display (> 5 5))
     (newline)
 )
 
