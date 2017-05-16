@@ -48,6 +48,8 @@ submit : Project3.cpp LexicalAnalyzer.h LexicalAnalyzer.save SyntacticalAnalyzer
 	cp CodeGenerator.h TeamGP3
 	cp CodeGenerator.cpp TeamGP3
 	cp makefile TeamGP3
+	cp TeamGP3.log TeamGP3
 	cp README.txt TeamGP3
+	cp -r testFiles TeamGP3
 	tar cfvz TeamGP3.tgz TeamGP3
 	cp TeamGP3.tgz ~tiawatts/cs460drop
