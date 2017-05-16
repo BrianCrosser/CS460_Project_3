@@ -351,7 +351,11 @@ int SyntacticalAnalyzer::stmt(){
     } else if (rule == 9){
         stmtDepth++;
 	    token = NextToken();
-	    string oper = lex->GetLexeme();
+        bool callingIF = false;
+        if (token == IF_T){
+           callingIF = true; 
+        }
+	    //string oper = lex->GetLexeme();
         errors += action();
         vector<int>expected_vector;
         expected_vector.push_back(RPAREN_T);
@@ -363,9 +367,12 @@ int SyntacticalAnalyzer::stmt(){
         }
         token = NextToken();	//Get one additional token
         stmtDepth--;
+        cout << stmtDepth << endl;
         if(stmtDepth == 0){
             cg->WriteCode(";\n");
         }
+        if(callingIF)
+            stmtDepth++;
     }
 		
 	ending(nonTerminal, token, errors);
@@ -573,7 +580,9 @@ int SyntacticalAnalyzer::else_part(){
 	rule = GetRule(9,token);
     }
     if (rule == 17) {
+        cg->WriteCode("    else{\n");
 	errors += runNonterminal("stmt");
+        cg->WriteCode("    }\n");
 
     } else if (rule == 18) {
         //Do nothing for lambda.
@@ -613,12 +622,13 @@ int SyntacticalAnalyzer::action(){
    
     switch (rule) {
     case 19: // if
-      cg->WriteCode("if");
+      cg->WriteCode("    if");
         token = NextToken();
         errors += runNonterminal("stmt");
+        stmtDepth--;
         cg->WriteCode("{\n");
         errors += runNonterminal("stmt");
-        cg->WriteCode("\n}\n");
+        cg->WriteCode("    }\n");
         errors += runNonterminal("else_part");
         break;
     case 20: // List op - car/cdr
