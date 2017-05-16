@@ -29,6 +29,7 @@ run : P3.out
 	./P3.out testFiles/11_test.ss
 	./P3.out testFiles/12_test.ss
 	./P3.out testFiles/13_test.ss
+	./P3.out testFiles/14_test.ss
 	./diffs.sh
 
 clean : 

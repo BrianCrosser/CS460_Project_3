@@ -15,7 +15,7 @@ Object removeFirst(Object list){
 int main(){
     Object _retVal; 
 
-    removeFirst(    _retVal = Object("(1 2 3 4)");
+    removeFirst(    Object("(1 2 3 4)");
 );
 
 	return 0;

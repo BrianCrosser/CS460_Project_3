@@ -180,4 +180,18 @@ else
 fi
 echo
 echo "================================================================================"
+
+echo
+if [ -f "./testFiles/14_test.cpp" ] && [ -f "./testFiles/expected/14_test.exp.cpp" ]
+then
+    echo 'Lines proceded by < are from ' 14_test.cpp
+    echo 'Lines proceded by > are from ' 14_test.exp.cpp
+    echo
+
+    diff -y -s -b -E -B ./testFiles/14_test.cpp ./testFiles/expected/14_test.exp.cpp
+else
+    echo "error: missing file!"
+fi
+echo
+echo "================================================================================"
 echo
