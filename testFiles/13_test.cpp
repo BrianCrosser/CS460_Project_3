@@ -33,8 +33,8 @@ Object orTest(){
 int main(){
     Object _retVal; 
 
-    andTest();
-    orTest();
+  andTest();
+  orTest();
 
 	return 0;
 }

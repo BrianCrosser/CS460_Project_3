@@ -17,7 +17,7 @@ _retVal =     Object("display");
 int main(){
     Object _retVal; 
 
-    stuff();
+  stuff();
 
 	return 0;
 }
