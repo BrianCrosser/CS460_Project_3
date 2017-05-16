@@ -139,3 +139,45 @@ fi
 echo
 echo "================================================================================"
 echo
+
+if [ -f "./testFiles/11_test.cpp" ] && [ -f "./testFiles/expected/11_test.exp.cpp" ]
+then
+    echo 'Lines proceded by < are from ' 11_test.cpp
+    echo 'Lines proceded by > are from ' 11_test.exp.cpp
+    echo
+
+    diff -y -s -b -E -B ./testFiles/11_test.cpp ./testFiles/expected/11_test.exp.cpp
+else
+    echo "error: missing file!"
+fi
+echo
+echo "================================================================================"
+echo
+
+if [ -f "./testFiles/12_test.cpp" ] && [ -f "./testFiles/expected/12_test.exp.cpp" ]
+then
+    echo 'Lines proceded by < are from ' 12_test.cpp
+    echo 'Lines proceded by > are from ' 12_test.exp.cpp
+    echo
+
+    diff -y -s -b -E -B ./testFiles/12_test.cpp ./testFiles/expected/12_test.exp.cpp
+else
+    echo "error: missing file!"
+fi
+echo
+echo "================================================================================"
+echo
+
+if [ -f "./testFiles/13_test.cpp" ] && [ -f "./testFiles/expected/13_test.exp.cpp" ]
+then
+    echo 'Lines proceded by < are from ' 13_test.cpp
+    echo 'Lines proceded by > are from ' 13_test.exp.cpp
+    echo
+
+    diff -y -s -b -E -B ./testFiles/13_test.cpp ./testFiles/expected/13_test.exp.cpp
+else
+    echo "error: missing file!"
+fi
+echo
+echo "================================================================================"
+echo

@@ -412,8 +412,10 @@ int SyntacticalAnalyzer::literal(){
         //cg->WriteCode(cg->operators.top());
 	
     } else if (rule == 11) {
+        cg->WriteCode("    _retVal = Object(\"");
         token = NextToken();
         errors += runNonterminal("quoted_lit");
+        cg->WriteCode("\");\n");
     }
     
     //if(token == RPAREN_T){
@@ -499,7 +501,10 @@ int SyntacticalAnalyzer::more_tokens(){
     }
     if (rule == 13) {
 	errors += runNonterminal("any_other_token");
-	errors += runNonterminal("more_tokens");
+	if(token != RPAREN_T) {
+        cg->WriteCode(" ");
+    }
+    errors += runNonterminal("more_tokens");
     } else if (rule == 14) {
         //Do nothing for lambda.
     }
@@ -789,11 +794,18 @@ int SyntacticalAnalyzer::any_other_token(){
 	rule = GetRule(11, token);
     }
     if (rule == 44) {
+        cg->WriteCode("(");
 	token = NextToken();
 	errors += runNonterminal("more_tokens");
 	token = NextToken();	//Get one additional lexeme
-    } else if (rule >= 45 && rule <= 72) {
+        cg->WriteCode(")");
+    } else if (rule >= 45 && rule <= 71) {
+        cg->WriteCode(lex->GetLexeme());
 	token = NextToken();	//Get one additional lexeme
+    } else if (rule == 72) {
+        cg->WriteCode("\'");
+        token = NextToken();
+        errors += any_other_token();
     }
     ending(nonTerminal, token, errors);
     return errors;

@@ -3,11 +3,13 @@
 
 using namespace std;
 
-Object removeFirst(Object list){
+Object stuff(){
     Object _retVal; 
 
-    cout << listcar(;
-    cout << endl;
+    _retVal = Object("(a b c)");
+    _retVal = Object("a");
+    _retVal = Object("'v");
+    _retVal = Object("display");
 
 	return _retVal;
 }
@@ -15,8 +17,7 @@ Object removeFirst(Object list){
 int main(){
     Object _retVal; 
 
-    removeFirst(    _retVal = Object("(1 2 3 4)");
-);
+    stuff();
 
 	return 0;
 }

@@ -3,10 +3,16 @@
 
 using namespace std;
 
-Object removeFirst(Object list){
+Object notTest(){
     Object _retVal; 
 
-    cout << listcar(;
+    if    _retVal = Object("a");
+{
+    cout << a;
+    }
+    else{
+    cout << is;
+    }
     cout << endl;
 
 	return _retVal;
@@ -15,8 +21,7 @@ Object removeFirst(Object list){
 int main(){
     Object _retVal; 
 
-    removeFirst(    _retVal = Object("(1 2 3 4)");
-);
+    notTest();
 
 	return 0;
 }
