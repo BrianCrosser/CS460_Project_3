@@ -3,10 +3,10 @@
 
 using namespace std;
 
-Object removeFirst(Object list){
+Object conThis(Object list){
     Object _retVal; 
 
-    _retVal = car(list);
+    _retVal = cons(list,Object("()"));
     
     return _retVal;
 }
@@ -14,7 +14,7 @@ Object removeFirst(Object list){
 int main(){
     Object _retVal; 
 
-    cout <<  removeFirst(Object("(1 2 3 4)"));    
+    cout <<  conThis(Object("(1 2 3 4)"));
     cout << endl;
     return 0;
 }
