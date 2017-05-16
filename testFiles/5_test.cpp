@@ -6,11 +6,12 @@ using namespace std;
 Object add(){
     Object _retVal; 
 
-    cout << (57);
+    cout << (5+7);
     cout << endl;
 
 	return _retVal;
 }
+
 int main(){
     Object _retVal; 
 

@@ -38,6 +38,7 @@ class SyntacticalAnalyzer
 	int runNonterminal(string n);
 	token_type NextToken();
 	string lstOutput;
+    int stmtDepth;
 };
 	
 #endif

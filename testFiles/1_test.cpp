@@ -6,7 +6,7 @@ using namespace std;
 int main(){
     Object _retVal; 
 
-    cout << (57);
+    cout << (5+7);
     cout << endl;
 
 	return 0;

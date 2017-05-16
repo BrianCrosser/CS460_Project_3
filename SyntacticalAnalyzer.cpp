@@ -51,6 +51,7 @@ SyntacticalAnalyzer::SyntacticalAnalyzer (char * filename)
     /********************************************************************************/
     lex = new LexicalAnalyzer (filename);
     cg = new CodeGenerator (filename);
+    stmtDepth = 0;
     int fnlength = strlen (filename);
     filename[fnlength-2] = 'p';
     filename[fnlength-1] = '2';
@@ -113,7 +114,7 @@ int SyntacticalAnalyzer::program (){
 
     if (rule == 1){
 	errors += runNonterminal("define");
-	errors += runNonterminal("more_defines");
+    errors += runNonterminal("more_defines");
     }
 
     if (token != EOF_T){
@@ -248,8 +249,9 @@ int SyntacticalAnalyzer::more_defines(){
 	rule = GetRule(2,token);
     }
     if (rule == 3){
-	errors += runNonterminal("define");
-	errors += runNonterminal("more_defines");
+	    cg->WriteCode("\n");
+        errors += runNonterminal("define");
+	    errors += runNonterminal("more_defines");
     } else if (rule == 4){
         //Do nothing for lambda.
     }
@@ -285,7 +287,10 @@ int SyntacticalAnalyzer::stmt_list(string operater){
     }
     if(rule == 5){
         errors += runNonterminal("stmt");
-        if(token == RPAREN_T){
+      if(token == RPAREN_T){
+        operater = "";
+      }
+        /*if(token == RPAREN_T){
             if(!cg->operators.empty()){
               cg->WriteCode(")");  
               cg->operators.pop();
@@ -299,11 +304,16 @@ int SyntacticalAnalyzer::stmt_list(string operater){
               }
             }
         }
-        else if(cg->operators.size() != 1){ cg->WriteCode(operater); }
+        else if(cg->operators.size() != 1){
+            cg->WriteCode(operater); 
+        } else { cg->WriteCode(operater); 
+        }
+        */
+        cg->WriteCode(operater);
         errors += stmt_list(operater);
-    }//if(operater != "" && token != RPAREN_T)
-        //cg->WriteCode(operater);
-    else if (rule == 6){ }
+    }
+     else if (rule == 6){ 
+     }
     ending(nonTerminal, token, errors);
     return errors;
 }
@@ -336,14 +346,13 @@ int SyntacticalAnalyzer::stmt(){
     if (rule == 7){
 	errors += runNonterminal("literal");	
     } else if (rule == 8){
+        cg->WriteCode(lex->GetLexeme());
 	token = NextToken();	//Get one additional token
     } else if (rule == 9){
+        stmtDepth++;
 	    token = NextToken();
 	    string oper = lex->GetLexeme();
         errors += action();
-        if(token == RPAREN_T && !cg->operators.empty()){
-            cg->WriteCode(cg->operators.top());
-        };
         vector<int>expected_vector;
         expected_vector.push_back(RPAREN_T);
         errors+= enforce(token, expected_vector);
@@ -353,6 +362,10 @@ int SyntacticalAnalyzer::stmt(){
             return errors;
         }
         token = NextToken();	//Get one additional token
+        stmtDepth--;
+        if(stmtDepth == 0){
+            cg->WriteCode(";\n");
+        }
     }
 		
 	ending(nonTerminal, token, errors);
@@ -656,30 +669,35 @@ int SyntacticalAnalyzer::action(){
       break;
     case 32: // +
       cg->WriteCode("(");
-      cg->operators.push("+");
+      //cg->operators.push("+");
       token = NextToken();
       errors += stmt_list("+");
-	break;
+      cg->WriteCode(")");
+	  break;
     case 33: // -
       cg->WriteCode("(");
-      cg->operators.push("-");
+      //cg->operators.push("-");
       token = NextToken();
       errors += runNonterminal("stmt");
       cg->WriteCode("-");
       errors += stmt_list("-");
-	break; 
+      cg->WriteCode(")");
+	  break;
     case 34: // /
       cg->WriteCode("(");
-      cg->operators.push("/");
+      //cg->operators.push("/");
 	token = NextToken();
 	errors += runNonterminal("stmt");
-	errors += stmt_list("/");
-	break; 
+    cg->WriteCode("/");
+	errors += stmt_list("/"); 
+      cg->WriteCode(")");
+	break;
     case 35: // *
       cg->WriteCode("(");
-      cg->operators.push("*");
+    //  cg->operators.push("*");
 	token = NextToken();
 	errors += stmt_list("*");
+      cg->WriteCode(")");
 	break;
     case 36: // =
       	token = NextToken();
@@ -702,9 +720,10 @@ int SyntacticalAnalyzer::action(){
 	errors += runNonterminal("stmt_list");
 	break;
     case 41: // IDENT_T
-      cg->WriteCode("    "+lex->GetLexeme() + "();\n");
+      cg->WriteCode("    "+lex->GetLexeme() + "(");
       token = NextToken();
-      errors += runNonterminal("stmt_list");
+      errors += stmt_list(",");
+      cg->WriteCode(")");
 	break;
     case 42: // display
 	token = NextToken();
@@ -712,7 +731,7 @@ int SyntacticalAnalyzer::action(){
 	errors += runNonterminal("stmt");
 	break;
     case 43: // newline
-      cg->WriteCode("    cout << endl;\n");
+      cg->WriteCode("    cout << endl");
       token = lex ->GetToken();
       break;
     }

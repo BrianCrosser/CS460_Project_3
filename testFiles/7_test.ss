@@ -3,6 +3,18 @@
     (newline)
 )
 
+(define (sub num1)
+    (display (- 10 num1))
+    (newline)
+)
+
+(define (addMore num1 num2 num3)
+    (display (+ num1 num2 num3))
+    (newline)
+)
+
 (define (main)
-    (add 5 7)  
+    (add 5 7)
+    (sub 5)
+    (addMore 5 7 9)
 )
