@@ -6,7 +6,7 @@ using namespace std;
 Object notTest(){
     Object _retVal; 
 
-    if    Object("a"){
+    if!    Object("a"){
     cout << a;
     }
     else{

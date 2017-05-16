@@ -6,7 +6,7 @@ using namespace std;
 Object removeFirst(Object list){
     Object _retVal; 
 
-	car(list);
+	_retVal = car(list);
 
 	return _retVal;
 }
