@@ -343,14 +343,17 @@ int SyntacticalAnalyzer::stmt(){
     }
     if (rule == 7){
         if(stmtDepth == 0)
-            cg->WriteCode("_retVal = ");
+            cg->WriteCode("    _retVal = ");
         errors += runNonterminal("literal");	
+        if(stmtDepth == 0){
+            cg->WriteCode(";\n");
+        }
     } else if (rule == 8){
         cg->WriteCode(lex->GetLexeme());
         token = NextToken();	//Get one additional token
     } else if (rule == 9){
         stmtDepth++;
-	token = NextToken();
+        token = NextToken();
         bool callingIF = false;
         if (token == IF_T){
            callingIF = true; 
@@ -417,7 +420,7 @@ int SyntacticalAnalyzer::literal(){
         cg->WriteCode("    Object(\"");
         token = NextToken();
         errors += runNonterminal("quoted_lit");
-        cg->WriteCode("\");\n");
+        cg->WriteCode("\")");
     }
     
     //if(token == RPAREN_T){
@@ -584,7 +587,7 @@ int SyntacticalAnalyzer::else_part(){
     }
     if (rule == 17) {
         cg->WriteCode("    else{\n");
-	errors += runNonterminal("stmt");
+        errors += runNonterminal("stmt");
         cg->WriteCode("    }\n");
 
     } else if (rule == 18) {
@@ -625,7 +628,7 @@ int SyntacticalAnalyzer::action(){
    
     switch (rule) {
     case 19: // if
-      cg->WriteCode("    if");
+        cg->WriteCode("    if");
         token = NextToken();
         errors += runNonterminal("stmt");
         stmtDepth--;
