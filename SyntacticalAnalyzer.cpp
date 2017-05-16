@@ -81,7 +81,6 @@ SyntacticalAnalyzer::~SyntacticalAnalyzer ()
   ***************************************************/
     p2file.close();
     lstfile.close();
-    cout << "Lexical errors: ";
     delete lex;
     delete cg;
 }
@@ -123,7 +122,6 @@ int SyntacticalAnalyzer::program (){
     }
 
     ending(nonTerminal, token, errors);
-    cout << "Syntactical errors: " << errors << " errors found in input file" << endl;
     return errors;
 }      
 
@@ -367,7 +365,6 @@ int SyntacticalAnalyzer::stmt(){
         }
         token = NextToken();	//Get one additional token
         stmtDepth--;
-        cout << stmtDepth << endl;
         if(stmtDepth == 0){
             cg->WriteCode(";\n");
         }
@@ -407,7 +404,6 @@ int SyntacticalAnalyzer::literal(){
 	rule = GetRule(5,token);
     }
     if (rule == 10) {//numlit
-      cout << "Lex: " << lex->GetLexeme() << endl;
       //cg->equation += lex->GetLexeme();
       //cg->equation += cg->operators.top();
 
@@ -888,7 +884,6 @@ int SyntacticalAnalyzer::enforce(token_type &token, vector<int>expected_vector) 
 		flag = false;
 	    }
 	}
-	cout << "Error, token expected: " << expected_tokens << " , received: " << lex->GetTokenName(token) << endl;
 	lstOutput += "Error, token expected: " + expected_tokens + " , received: " + lex->GetTokenName(token) + "\n";
 	errors ++;
     }
