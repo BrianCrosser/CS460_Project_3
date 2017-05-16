@@ -635,8 +635,10 @@ int SyntacticalAnalyzer::action(){
         errors += runNonterminal("else_part");
         break;
     case 20: // List op - car/cdr
+      if(stmtDepth == 1)
+            cg->WriteCode("\t_retVal = ");
+      cg->WriteCode(lex->GetLexeme()+"(");
       token = NextToken();
-      cg->WriteCode("\tcar(");
       errors += runNonterminal("stmt");
       cg->WriteCode(")");
       break;
