@@ -96,6 +96,7 @@ echo
 echo "================================================================================"
 echo
 
+
 if [ -f "./testFiles/8_test.cpp" ] && [ -f "./testFiles/expected/8_test.exp.cpp" ]
 then
     echo 'Lines proceded by < are from ' 8_test.cpp
@@ -110,6 +111,14 @@ echo
 echo "================================================================================"
 echo
 
+if [ -f "./testFiles/9_test.cpp" ] && [ -f "./testFiles/expected/9_test.exp.cpp" ]
+then
+    echo 'Lines proceded by < are from ' 9_test.cpp
+    echo 'Lines proceded by > are from ' 9_test.exp.cpp
+    echo
+
+    diff -y -s -b -E -B ./testFiles/9_test.cpp ./testFiles/expected/9_test.exp.cpp
+    
 if [ -f "./testFiles/10_test.cpp" ] && [ -f "./testFiles/expected/10_test.exp.cpp" ]
 then
     echo 'Lines proceded by < are from ' 10_test.cpp

@@ -1,6 +1,6 @@
 /********************************************************************************/
 /* Project: 2, Syntactical Analyzer 	      					*/
-/* Author: Jeff Bahns, Erich Bucher, Jordan Bergero		    		*/
+/* Author: Jordan Bergero, Brian Crosser, Fern Vue		    		*/
 /* Date: 4/16/2017							    	*/
 /* Description:	A syntactical analyzer built on top of Project 1. When a new    */
 /* 		SyntacticalAnalyzer object is created, it will open up the      */
@@ -634,6 +634,7 @@ int SyntacticalAnalyzer::action(){
     case 20: // List op - car/cdr
       token = NextToken();
       errors += runNonterminal("stmt");
+      cg->WriteCode("car(");
       break;
     case 21: // cons
 	token = NextToken();
