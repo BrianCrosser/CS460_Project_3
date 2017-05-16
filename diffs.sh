@@ -118,7 +118,13 @@ then
     echo
 
     diff -y -s -b -E -B ./testFiles/9_test.cpp ./testFiles/expected/9_test.exp.cpp
-    
+else
+    echo "error: missing file!"
+fi
+echo
+echo "================================================================================"
+echo
+
 if [ -f "./testFiles/10_test.cpp" ] && [ -f "./testFiles/expected/10_test.exp.cpp" ]
 then
     echo 'Lines proceded by < are from ' 10_test.cpp
@@ -132,4 +138,3 @@ fi
 echo
 echo "================================================================================"
 echo
-
