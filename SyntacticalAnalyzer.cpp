@@ -350,7 +350,7 @@ int SyntacticalAnalyzer::stmt(){
         token = NextToken();	//Get one additional token
     } else if (rule == 9){
         stmtDepth++;
-	    token = NextToken();
+	token = NextToken();
         bool callingIF = false;
         if (token == IF_T){
            callingIF = true; 
@@ -636,8 +636,9 @@ int SyntacticalAnalyzer::action(){
         break;
     case 20: // List op - car/cdr
       token = NextToken();
+      cg->WriteCode("\tcar(");
       errors += runNonterminal("stmt");
-      cg->WriteCode("car(");
+      cg->WriteCode(")");
       break;
     case 21: // cons
 	token = NextToken();
@@ -747,7 +748,7 @@ int SyntacticalAnalyzer::action(){
         cg->WriteCode(")");
 	break;
     case 41: // IDENT_T
-      cg->WriteCode("    "+lex->GetLexeme() + "(");
+      cg->WriteCode("  "+lex->GetLexeme() + "(");
       token = NextToken();
       errors += stmt_list(",");
       cg->WriteCode(")");
