@@ -14,7 +14,7 @@ Object removeFirst(Object list){
 int main(){
     Object _retVal; 
 
-    cout <<   removeFirst(    Object("(1 2 3 4)"));
+    cout <<   removeFirst(Object("(1 2 3 4)"));
     cout << endl;
 
 	return 0;
