@@ -212,6 +212,20 @@ echo
 
 echo
 echo
+if [ -f "./testFiles/16_test.cpp" ] && [ -f "./testFiles/expected/16_test.exp.cpp" ]
+then
+    echo 'Lines proceded by < are from ' 16_test.cpp
+    echo 'Lines proceded by > are from ' 16_test.exp.cpp
+    echo
+
+    diff -y -s -b -E -B ./testFiles/16_test.cpp ./testFiles/expected/16_test.exp.cpp
+else
+    echo "error: missing file!"
+fi
+echo
+echo "================================================================================"
+echo
+
 if [ -f "./testFiles/17_test.cpp" ] && [ -f "./testFiles/expected/17_test.exp.cpp" ]
 then
     echo 'Lines proceded by < are from ' 17_test.cpp
