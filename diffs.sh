@@ -1,3 +1,4 @@
+echo
 if [ -f "./testFiles/1_test.ss" ] && [ -f "./testFiles/expected/1_test.exp.cpp" ]
 then
     echo 'Lines proceded by < are from ' 1_test.cpp
